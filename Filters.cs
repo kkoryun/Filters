@@ -18,6 +18,8 @@ namespace Filters
             for (int i = 0; i < sourceMap.Width; i++)
             {
                 worker.ReportProgress((int)((float)i / resultMap.Width * 100));
+                if (worker.CancellationPending)
+                    return sourceMap;
                  
                 for (int j = 0; j < sourceMap.Height; j++)
                     resultMap.SetPixel(i, j, сonvertPixel(sourceMap, i, j));

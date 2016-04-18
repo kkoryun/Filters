@@ -7,16 +7,12 @@ using System.Threading.Tasks;
 
 namespace Filters
 {
-    class Glass: Filters
+    class Rotation: Filters
     {
         protected override Color сonvertPixel(Bitmap sourceMap, int x, int y)
         {
-            Random rand = new Random();
-            int positionX = (int)(x + (rand.Next(1) - 0.5f) * 10);
-            int positionY = (int)(y + (rand.Next(1) - 0.5f) * 10);
-
-            //positionX = clamp(positionX, 0, sourceMap.Width);
-            //positionY = clamp(positionY, 0, sourceMap.Height);
+            int positionX =(int) ((x - sourceMap.Width / 2) * Math.Cos(1.5708) - (y-sourceMap.Height/2)*Math.Sin(1.5708)+ sourceMap.Width / 2);
+            int positionY = (int)((x - sourceMap.Width / 2) * Math.Sin(1.5708) + (y - sourceMap.Height / 2) * Math.Cos(1.5708) + sourceMap.Height / 2);
             if (positionX < sourceMap.Width && positionX > 0 && positionY < sourceMap.Height && positionY > 0)
             {
                 Color c = sourceMap.GetPixel(positionX, positionY);
@@ -24,11 +20,10 @@ namespace Filters
             }
             else
             {
-               Color c = Color.FromArgb(255, 255, 255);
+                Color c = Color.FromArgb(255, 255, 255);
                 return c;
             }
             throw new NotImplementedException();
         }
-        
     }
 }

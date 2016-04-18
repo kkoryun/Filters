@@ -29,10 +29,11 @@ namespace Filters
                     int idX = clamp(x + k, 0, sourceMap.Width - 1);
                     int idY = clamp(y + l, 0, sourceMap.Height - 1);
                     Color neighborColor = sourceMap.GetPixel(idX, idY);
-                    resultR += neighborColor.R * kernel[k + radiusX, 1 + radiusY];
-                    resultG += neighborColor.G * kernel[k + radiusX, 1 + radiusY];
-                    resultB += neighborColor.B * kernel[k + radiusX, 1 + radiusY];
+                    resultR += neighborColor.R * kernel[k + radiusX, l + radiusY];
+                    resultG += neighborColor.G * kernel[k + radiusX, l + radiusY];
+                    resultB += neighborColor.B * kernel[k + radiusX, l + radiusY];
                 }
+            
             return Color.FromArgb(clamp((int)resultR, 0, 255), clamp((int)resultG, 0, 255), clamp((int)resultB, 0, 255));
 
 
